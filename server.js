@@ -12,7 +12,7 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    console.log(req.body);
+    console.log(req.body.email, req.body.password);
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));
