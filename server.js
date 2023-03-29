@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const os = require('os');
+const db = require('./mongoMeth');
 
 const app = express();
 const port = 8080;
@@ -11,6 +11,8 @@ app.get('/api', (req, res) => {
     res.send({ msg: 'success' });
 });
 
-console.log(os.networkInterfaces());
+app.post('/login', (req, res) => {
+    console.log(req.body);
+});
 
 app.listen(port, console.log(`Listening on port ${port}`));
