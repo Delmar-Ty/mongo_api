@@ -6,7 +6,7 @@ const port = 8080;
 
 app.use(bodyparser.json());
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send({ msg: 'success' });
 });
 
