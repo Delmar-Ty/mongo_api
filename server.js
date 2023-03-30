@@ -8,7 +8,7 @@ const os = require('os');
 const app = express();
 const port = 8080;
 const db = mongoMeth.db;
-const dbURL = 'mongodb+srv://Delmar:Something123@cluster0.tg0mxdx.mongodb.net/test';
+const dbURL = 'mongodb+srv://Delmar:Something123@cluster0.tg0mxdx.mongodb.net/User';
 
 console.log(os.networkInterfaces());
 
@@ -17,12 +17,18 @@ app.use(cors());
 
 app.get('/api', (req, res) => {
     res.send({ msg: 'success' });
+    console.log(req.ip);
 });
 
 app.post('/login', async (req, res) => {
     console.log(req.body.email, req.body.password);
     await mongoose.connect(dbURL);
     db.createUser({ email: req.body.email, password: req.body.password });
+});
+
+app.post('/signup', async (req, res) => {
+    const data = req.body;
+
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));
