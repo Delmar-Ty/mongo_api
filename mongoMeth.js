@@ -13,9 +13,7 @@ const db = {
                 password: data.password
             });
 
-            doc.save(error => {
-                if (error) throw error;
-            });
+            doc.save();
         } catch (error) {
             console.log(error);
         }
