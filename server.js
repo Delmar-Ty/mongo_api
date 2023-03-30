@@ -23,7 +23,6 @@ app.post('/login', async (req, res) => {
     console.log(req.body.email, req.body.password);
     await mongoose.connect(dbURL);
     db.createUser({ email: req.body.email, password: req.body.password });
-    mongoose.disconnect();
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));
