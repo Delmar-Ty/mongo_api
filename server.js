@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const db = require('./mongoMeth');
+const cors = require('cors');
 
 const app = express();
 const port = 8080;
 
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(cors());
 
 app.get('/api', (req, res) => {
     res.send({ msg: 'success' });
