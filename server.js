@@ -3,11 +3,14 @@ const bodyparser = require('body-parser');
 const mongoMeth = require('./mongoMeth');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const os = require('os');
 
 const app = express();
 const port = 8080;
 const db = mongoMeth.db;
 const dbURL = 'mongodb+srv://Delmar:Something123@cluster0.tg0mxdx.mongodb.net/test';
+
+console.log(os.networkInterfaces());
 
 app.use(bodyparser.json());
 app.use(cors());
