@@ -15,7 +15,6 @@ app.use(cors());
 
 app.get('/api', (req, res) => {
     res.send({ msg: 'success' });
-    console.log(req.ip);
 });
 
 app.post('/login', async (req, res) => {
