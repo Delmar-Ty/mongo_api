@@ -24,7 +24,7 @@ const db = {
         const promise = new Promise(async (res, rej) => {
             try {
                 await mongoose.connect(dbURL);
-                const doc = User.findOne({ email: email });
+                const doc = await User.findOne({ email: email });
                 if (doc !== null) {
                     res(true);
                 } else {
