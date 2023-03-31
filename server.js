@@ -26,7 +26,7 @@ app.post('/login', async (req, res) => {
 
 app.post('/signup', async (req, res) => {
     const data = req.body;
-    const exists = db.UserExists(data.email);
+    const exists = await db.UserExists(data.email);
     console.log(exists);
 });
 
