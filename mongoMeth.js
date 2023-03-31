@@ -25,11 +25,12 @@ const db = {
             try {
                 await mongoose.connect(dbURL);
                 const doc = User.findOne({ email: email });
-                if (doc) {
-                    res(true);
-                } else {
-                    res(false);
-                }
+                // if (doc) {
+                //     res(true);
+                // } else {
+                //     res(false);
+                // }
+                res(doc);
             } catch (error) {
                 console.log(error);
                 rej(error);
