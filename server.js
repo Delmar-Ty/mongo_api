@@ -21,13 +21,16 @@ app.get('/api', (req, res) => {
 app.post('/login', async (req, res) => {
     console.log(req.body.email, req.body.password);
     await mongoose.connect(dbURL);
-    db.createUser({ email: req.body.email, password: req.body.password });
 });
 
 app.post('/signup', async (req, res) => {
     const data = req.body;
     const exists = await db.UserExists(data.email);
-    console.log(exists);
+    if (exists) {
+        res.send({ msg: 'Email already in use' });
+    } else {
+        res.send({ msg: 'You may sign up with these credentials' });
+    }
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));
