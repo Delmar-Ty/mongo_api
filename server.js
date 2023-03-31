@@ -26,7 +26,8 @@ app.post('/login', async (req, res) => {
 
 app.post('/signup', async (req, res) => {
     const data = req.body;
-    console.log(data);
+    const exists = db.UserExists(data.email);
+    console.log(exists);
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));

@@ -20,7 +20,7 @@ const db = {
             console.log(error);
         }
     },
-    exists: (email) => {
+    UserExists: (email) => {
         const promise = new Promise(async (res, rej) => {
             try {
                 await mongoose.connect(dbURL);
