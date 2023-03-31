@@ -29,7 +29,7 @@ app.post('/signup', async (req, res) => {
     if (exists) {
         res.send({ msg: 'Email already in use' });
     } else {
-        res.send({ msg: 'You may sign up with these credentials' });
+        db.createUser(data);
     }
 });
 
