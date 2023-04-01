@@ -26,10 +26,10 @@ app.post('/signup', async (req, res) => {
     const data = req.body;
     const exists = await db.UserExists(data.email);
     if (exists) {
-        res.send({ msg: 'Email already in use' });
+        res.send(JSON.stringify({ msg: 'Email already in use' }));
     } else {
         db.createUser(data);
-        res.send({ msg: 'You have been signed up!' });
+        res.send(JSON.stringify({ msg: 'You have been signed up!' }));
     }
 });
 
