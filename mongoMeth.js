@@ -11,7 +11,8 @@ const db = {
                 lName: data.lName,
                 email: data.email,
                 campus: data.campus,
-                password: data.password
+                password: data.password,
+                login: '{logged: false, device: ""}'
             });
 
             await doc.save();
@@ -26,11 +27,11 @@ const db = {
                 await mongoose.connect(dbURL);
                 const doc = await User.findOne({ email: email });
                 mongoose.connection.close();
-                console.log(doc._id.toString(), typeof(doc._id));
+                const login = JSON.parse(doc.login);
                 if (doc !== null) {
-                    res(true);
+                    res({ exists: true, id: doc._id.toString(), logged: login.logged });
                 } else {
-                    res(false);
+                    res({ exists: false });
                 }
             } catch (error) {
                 console.log(error);
@@ -38,6 +39,29 @@ const db = {
             }
         });
         return promise;
+    },
+    getUser: (id) => {
+        const promise = new Promise(async (res, rej) => {
+            try {
+                await mongoose.connect(dbURL);
+                const doc = await User.findById(id);
+                mongoose.connection.close();
+                res(doc);
+            } catch (error) {
+                console.log(error);
+                rej(error);
+            }
+        });
+        return promise
+    },
+    updateLogin: async (id, data) => {
+        try {
+            await mongoose.connect(dbURL);
+            await User.findByIdAndUpdate(id, { login: data });
+            mongoose.connection.close();
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
 

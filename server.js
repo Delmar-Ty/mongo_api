@@ -19,16 +19,29 @@ app.get('/api', (req, res) => {
 
 app.post('/login', async (req, res) => {
     const data = req.body;
+    const result = await db.UserExists(data.email);
+    if (result.exists && !result.logged) {
+        const user = await db.getUser(result.id);
+        if (user.email === data.email && user.password === data.password) {
+            res(JSON.stringify({ auth: true, msg: 'Success' }));
+            db.updateLogin(result.id, JSON.stringify({logged: true, device: data.device}));
+        } else {
+            res(JSON.stringify({ auth: false, msg: 'Invalid login' }));
+        }
+    } else if (result.exists && result.logged) {
+        res(JSON.stringify({ auth: false, msg: 'User is already logged in on a different device' }));
+    } else {
+        res(JSON.stringify({ auth: false, msg: 'Invalid login' }));
+    }
 });
 
 app.post('/signup', async (req, res) => {
     const data = req.body;
-    const exists = await db.UserExists(data.email);
-    if (exists) {
+    const result = await db.UserExists(data.email);
+    if (result.exists) {
         res.send(JSON.stringify({ msg: 'Email already in use' }));
     } else {
         db.createUser(data);
-        res.send(JSON.stringify({ msg: 'You have been signed up!' }));
     }
 });
 
