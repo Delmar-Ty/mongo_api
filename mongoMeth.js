@@ -26,6 +26,7 @@ const db = {
                 await mongoose.connect(dbURL);
                 const doc = await User.findOne({ email: email });
                 mongoose.connection.close();
+                console.log(doc);
                 if (doc !== null) {
                     res(true);
                 } else {

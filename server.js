@@ -18,8 +18,7 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    console.log(req.body.email, req.body.password);
-    await mongoose.connect(dbURL);
+    const data = req.body;
 });
 
 app.post('/signup', async (req, res) => {
