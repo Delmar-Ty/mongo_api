@@ -10,8 +10,8 @@ const db = mongoMeth.db;
 app.use(bodyparser.json());
 app.use(cors());
 
-app.get('/api', (req, res) => {
-    res.send({ msg: 'success' });
+app.get('/account/:device', (req, res) => {
+
 });
 
 app.post('/login', async (req, res) => {
@@ -20,7 +20,7 @@ app.post('/login', async (req, res) => {
     if (result.exists && !result.logged) {
         const user = await db.getUser(result.id);
         if (user.email === data.email && user.password === data.password) {
-            res.send(JSON.stringify({ auth: true, msg: 'Success' }));
+            res.send(JSON.stringify({ auth: true, msg: 'Success', id: result.id }));
             db.updateLogin(result.id, JSON.stringify({logged: true, device: data.device}));
         } else {
             res.send(JSON.stringify({ auth: false, msg: 'Invalid login' }));
