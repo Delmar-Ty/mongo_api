@@ -10,10 +10,6 @@ const db = mongoMeth.db;
 app.use(bodyparser.json());
 app.use(cors());
 
-app.get('/account/:device', (req, res) => {
-
-});
-
 app.post('/login', async (req, res) => {
     const data = req.body;
     const result = await db.UserExists(data.email);
