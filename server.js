@@ -13,6 +13,7 @@ app.use(cors());
 app.get('/user/:id', async (req, res) => {
     const user = await db.getUser(req.params.id);
     user.login = JSON.parse(user.login);
+    res.send(JSON.stringify(user));
 });
 
 app.post('/login', async (req, res) => {
