@@ -12,7 +12,7 @@ const db = {
                 email: data.email,
                 campus: data.campus,
                 password: data.password,
-                login: '{logged: false, device: ""}'
+                login: '{logged: false, device: "none"}'
             });
 
             await doc.save();
