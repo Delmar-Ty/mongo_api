@@ -26,7 +26,12 @@ app.post('/login', async (req, res) => {
             res.send(JSON.stringify({ auth: false, msg: 'Invalid login' }));
         }
     } else if (result.exists && result.logged) {
-        res.send(JSON.stringify({ auth: false, msg: 'User is already logged in on a different device' }));
+        const user = await db.getUser(result.id);
+        if (user.password === data.password) {
+            res.send(JSON.stringify({ auth: false, msg: 'User is already logged in on a different device' }));
+        } else {
+            res.send(JSON.stringify({ auth: false, msg: 'Invalid login' }));
+        }
     } else {
         res.send(JSON.stringify({ auth: false, msg: 'Invalid login' }));
     }
