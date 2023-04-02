@@ -27,8 +27,8 @@ const db = {
                 await mongoose.connect(dbURL);
                 const doc = await User.findOne({ email: email });
                 mongoose.connection.close();
-                const login = JSON.parse(doc.login);
                 if (doc !== null) {
+                    const login = JSON.parse(doc.login);
                     res({ exists: true, id: doc._id.toString(), logged: login.logged });
                 } else {
                     res({ exists: false });
