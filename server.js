@@ -42,6 +42,7 @@ app.post('/signup', async (req, res) => {
         res.send(JSON.stringify({ msg: 'Email already in use' }));
     } else {
         db.createUser(data);
+        res.send(JSON.stringify({ success: true }));
     }
 });
 
