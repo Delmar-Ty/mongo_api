@@ -68,7 +68,13 @@ const db = {
             try {
                 await mongoose.connect(dbURL);
                 const doc = await User.findOne({ login: JSON.stringify({ logged: true, device: device }) });
-                console.log(doc);
+                mongoose.connection.close();
+                if (doc !== null) {
+                    doc.logged = JSON.parse(doc.logged);
+                    res(doc);
+                } else {
+                    res(false);
+                }
             } catch (error) {
                 console.log(error);
             }

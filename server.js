@@ -59,8 +59,12 @@ app.post('/logout', async (req, res) => {
 
 app.post('/deviceLogged', async (req, res) => {
     const device = req.body.device;
-    await db.loggedOnDevice(device);
-    res(JSON.stringify({ success: true }));
+    const result = await db.loggedOnDevice(device);
+    if (!result) {
+        res.send(JSON.stringify({ success: false }));
+    } else {
+        res.send(JSON.stringify({ success: true, user: result }));
+    }
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));
