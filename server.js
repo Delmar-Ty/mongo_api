@@ -63,7 +63,7 @@ app.post('/deviceLogged', async (req, res) => {
     if (!result) {
         res.send(JSON.stringify({ success: false }));
     } else {
-        res.send(JSON.stringify({ success: true, user: result }));
+        res.send(JSON.stringify({ success: true, id: result }));
     }
 });
 
