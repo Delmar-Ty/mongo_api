@@ -57,7 +57,7 @@ app.post('/logout', async (req, res) => {
     res.send(JSON.stringify({ success: true }));
 });
 
-app.get('/deviceLogged', async (req, res) => {
+app.post('/deviceLogged', async (req, res) => {
     const device = req.body.device;
     db.loggedOnDevice(device);
 });
