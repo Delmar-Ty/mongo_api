@@ -70,7 +70,7 @@ const db = {
                 const doc = await User.findOne({ login: JSON.stringify({ logged: true, device: device }) });
                 mongoose.connection.close();
                 if (doc !== null) {
-                    doc.logged = JSON.parse(doc.logged);
+                    doc.login = JSON.parse(doc.login);
                     res(doc);
                 } else {
                     res(false);
