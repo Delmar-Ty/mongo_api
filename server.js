@@ -50,7 +50,7 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-app.post('/logout', async (req, res) => {
+app.post('/logout', (req, res) => {
     const id = req.body.id;
     const data = JSON.stringify({logged: false, device: 'none'});
     db.updateLogin(id, data);
