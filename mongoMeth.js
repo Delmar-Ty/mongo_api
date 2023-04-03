@@ -73,6 +73,8 @@ const db = {
                 console.log(error);
             }
         });
+
+        return promise;
     }
 };
 
