@@ -52,10 +52,14 @@ app.post('/signup', async (req, res) => {
 
 app.post('/logout', async (req, res) => {
     const id = req.body.id;
-    console.log(id);
     const update = JSON.stringify({ logged: false, device: 'none' });
     db.updateLogin(id, update);
     res.send(JSON.stringify({ success: true }));
+});
+
+app.get('/deviceLogged', async (req, res) => {
+    const device = req.body.device;
+    db.loggedOnDevice(device);
 });
 
 app.listen(port, console.log(`Listening on port ${port}`));

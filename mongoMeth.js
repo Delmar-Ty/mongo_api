@@ -62,6 +62,17 @@ const db = {
         } catch (error) {
             console.log(error);
         }
+    },
+    loggedOnDevice: async (device) => {
+        const promise = new Promise(async (res, rej) => {
+            try {
+                await mongoose.connect(dbURL);
+                const doc = await User.findOne({ login: JSON.stringify({ logged: true, device: device }) });
+                console.log(doc);
+            } catch (error) {
+                console.log(error);
+            }
+        });
     }
 };
 
