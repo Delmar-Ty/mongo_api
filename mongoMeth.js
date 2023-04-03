@@ -54,14 +54,18 @@ const db = {
         });
         return promise
     },
-    updateLogin: async (id, data) => {
-        try {
-            await mongoose.connect(dbURL);
-            await User.findByIdAndUpdate(id, { login: data });
-            mongoose.connection.close();
-        } catch (error) {
-            console.log(error);
-        }
+    updateLogin: (id, data) => {
+        const promise = new Promise(async (res, rej) => {
+            try {
+                await mongoose.connect(dbURL);
+                await User.findByIdAndUpdate(id, { login: data });
+                mongoose.connection.close();
+                res();
+            } catch (error) {
+                console.log(error);
+            }
+        });
+        return promise;
     },
     loggedOnDevice: async (device) => {
         const promise = new Promise(async (res, rej) => {
