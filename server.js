@@ -50,11 +50,11 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-// app.post('/logout', (req, res) => {
-//     const id = req.body.id;
-//     const data = JSON.stringify({logged: false, device: 'none'});
-//     db.updateLogin(id, data);
-//     res.send(JSON.stringify({ success: true }));
-// });
+app.post('/logout', async (req, res) => {
+    const id = req.body.id;
+    const update = JSON.stringify({ logged: false, device: 'none' });
+    db.updateLogin(id, update);
+    res.send(JSON.stringify({ success: true }));
+});
 
 app.listen(port, console.log(`Listening on port ${port}`));
